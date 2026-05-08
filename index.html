@@ -4,39 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bagay! - Find Your Match</title>
+    <title>Document</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React and ReactDOM from CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Babel Standalone for JSX support -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .map-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-        .map-container img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        #pins-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -81,263 +55,41 @@
                 </li>
             </ul>
         </div>
-    
-        <div class="map-container">
-            <img src="assets/images/Bagay! _ Assets/main.png" alt="map">
-            <div id="pins-overlay"></div>
-        </div>
-    
-        <div class="second-person">
-            <p>a</p>
+
+        <img src="assets/images/Bagay! _ Assets/main.png" alt="map">
+
+        <div class="second-person deep-orange lighten-2">
+            <div class="card deep-orange darken-1 white-text">
+                <div class="card-title">
+                    <span><i>Maria</i></span>
+                </div>
+                <h6>Who am I?</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum optio earum non esse asperiores nulla
+                    recusandae in perferendis quasi reiciendis, neque sit beatae rerum consectetur tempora iure, eos
+                    corporis totam.</p>
+            </div>
+            <ul class="collapsible deep-orange lighten-1 white-text">
+                <li>
+                    <div class="collapsible-header deep-orange darken-1 white-text waves-effect waves-light"><i class="material-icons">brush</i>Hobbies</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header deep-orange darken-1 white-text waves-effect waves-light"><i class="material-icons">favorite_border</i>Favorites</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header deep-orange darken-1 white-text waves-effect waves-light"><i class="material-icons">face</i>Personality</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header deep-orange darken-1 white-text waves-effect waves-light"><i class="material-icons">location_on</i>Looking for...</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+            </ul>
         </div>
     </main>
 
-    <script type="text/babel">
-        const { useState, useRef } = React;
+    <script src="js/app.js"></script>
+</body>
 
-        // Constants
-        const COLORS = ['#e8547a', '#7c6fe0', '#2bbbad', '#f4a62a', '#3d9ef5', '#e05b8a', '#58c77a', '#f06e42'];
-
-        const INITIAL_USERS = [
-          { id: 1, name: 'Alex Santos',  college: 'CCS',  x: 15, y: 55, color: COLORS[0], myTraits: ['Analytical', 'Introverted', 'Creative'], idealTraits: ['Humorous', 'Empathetic', 'Chill'] },
-          { id: 2, name: 'Bea Reyes',    college: 'CBAA', x: 63, y: 48, color: COLORS[1], myTraits: ['Humorous', 'Empathetic', 'Sociable'],   idealTraits: ['Analytical', 'Ambitious', 'Creative'] },
-          { id: 3, name: 'Carlo Mendez', college: 'COE',  x: 30, y: 22, color: COLORS[2], myTraits: ['Ambitious', 'Serious', 'Logical'],      idealTraits: ['Creative', 'Organized', 'Empathetic'] },
-          { id: 4, name: 'Dana Cruz',    college: 'CON',  x: 77, y: 42, color: COLORS[3], myTraits: ['Empathetic', 'Nurturing', 'Organized'], idealTraits: ['Humorous', 'Chill', 'Sociable'] },
-          { id: 5, name: 'Eli Torres',   college: 'CCS',  x: 22, y: 78, color: COLORS[4], myTraits: ['Creative', 'Spontaneous', 'Adventurous'],idealTraits: ['Chill', 'Artistic', 'Laid-back'] },
-          { id: 6, name: 'Faye Lim',     college: 'CBAA', x: 58, y: 72, color: COLORS[5], myTraits: ['Chill', 'Artistic', 'Independent'],     idealTraits: ['Creative', 'Spontaneous', 'Humorous'] },
-          { id: 7, name: 'Gio Navarro',  college: 'COE',  x: 46, y: 60, color: COLORS[6], myTraits: ['Organized', 'Logical', 'Ambitious'],    idealTraits: ['Nurturing', 'Empathetic', 'Sociable'] },
-          { id: 8, name: 'Hana Park',    college: 'CON',  x: 84, y: 65, color: COLORS[7], myTraits: ['Sociable', 'Humorous', 'Laid-back'],    idealTraits: ['Serious', 'Ambitious', 'Analytical'] },
-        ];
-
-        const getInitials = (name) => {
-          return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-        };
-
-        const computeScore = (a, b) => {
-          if (!a.idealTraits.length || !b.idealTraits.length) return 0;
-          const ab = a.idealTraits.filter(t => b.myTraits.includes(t)).length / a.idealTraits.length;
-          const ba = b.idealTraits.filter(t => a.myTraits.includes(t)).length / b.idealTraits.length;
-          return Math.round(((ab + ba) / 2) * 100);
-        };
-
-        function BagayMap() {
-          const containerRef = useRef(null);
-          
-          const [users, setUsers] = useState(INITIAL_USERS);
-          const [matches, setMatches] = useState([]);
-          const [dragState, setDragState] = useState({ id: null, offsetX: 0, offsetY: 0, startX: 0, startY: 0, didDrag: false });
-          const [activePopupId, setActivePopupId] = useState(null);
-          const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-          const [toast, setToast] = useState({ show: false, nameA: '', nameB: '', score: 0 });
-          const [matchedPins, setMatchedPins] = useState([]);
-
-          const handlePointerDown = (e, user) => {
-            e.preventDefault();
-            const rect = containerRef.current.getBoundingClientRect();
-            const pinPixelX = (user.x / 100) * rect.width;
-            const pinPixelY = (user.y / 100) * rect.height;
-            const offsetX = e.clientX - rect.left - pinPixelX;
-            const offsetY = e.clientY - rect.top - pinPixelY;
-
-            setDragState({ id: user.id, offsetX, offsetY, startX: e.clientX, startY: e.clientY, didDrag: false });
-            setActivePopupId(null);
-          };
-
-          const handlePointerMove = (e) => {
-            if (!dragState.id || !containerRef.current) return;
-            
-            if (Math.abs(e.clientX - dragState.startX) > 5 || Math.abs(e.clientY - dragState.startY) > 5) {
-              setDragState(prev => prev.didDrag ? prev : { ...prev, didDrag: true });
-            }
-
-            const rect = containerRef.current.getBoundingClientRect();
-            const newPixelX = e.clientX - rect.left - dragState.offsetX;
-            const newPixelY = e.clientY - rect.top - dragState.offsetY;
-
-            const newX = (newPixelX / rect.width) * 100;
-            const newY = (newPixelY / rect.height) * 100;
-
-            setUsers(prev => prev.map(u => u.id === dragState.id ? { ...u, x: newX, y: newY } : u));
-          };
-
-          const handlePointerUp = (e) => {
-            if (!dragState.id || !containerRef.current) return;
-            
-            const droppedUserId = dragState.id;
-            const droppedUser = users.find(u => u.id === droppedUserId);
-
-            if (!dragState.didDrag) {
-              setActivePopupId(droppedUserId);
-            } else {
-              const rect = containerRef.current.getBoundingClientRect();
-              const dropPxX = (droppedUser.x / 100) * rect.width;
-              const dropPxY = (droppedUser.y / 100) * rect.height;
-
-              for (const other of users) {
-                if (other.id === droppedUserId) continue;
-                const otherPxX = (other.x / 100) * rect.width;
-                const otherPxY = (other.y / 100) * rect.height;
-                const dist = Math.hypot(dropPxX - otherPxX, dropPxY - otherPxY);
-                
-                if (dist < 55) {
-                  triggerMatch(droppedUser, other);
-                  break;
-                }
-              }
-            }
-            setDragState({ id: null, offsetX: 0, offsetY: 0, startX: 0, startY: 0, didDrag: false });
-          };
-
-          const triggerMatch = (userA, userB) => {
-            const score = computeScore(userA, userB);
-            
-            setMatches(prev => {
-              const exists = prev.some(m => (m.a === userA.id && m.b === userB.id) || (m.a === userB.id && m.b === userA.id));
-              if (exists) return prev;
-              return [...prev, { a: userA.id, b: userB.id, score }];
-            });
-
-            setMatchedPins([userA.id, userB.id]);
-            setTimeout(() => setMatchedPins([]), 700);
-
-            setToast({ show: true, nameA: userA.name, nameB: userB.name, score });
-            setTimeout(() => setToast(prev => ({ ...prev, show: false })), 3000);
-          };
-
-          const activeUser = users.find(u => u.id === activePopupId);
-
-          return (
-            <div 
-              ref={containerRef}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerLeave={handlePointerUp}
-              className="relative w-full h-full overflow-hidden select-none"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap');
-                @keyframes heartbeat {
-                  0%   { transform: translate(-50%, -100%) scale(1); }
-                  30%  { transform: translate(-50%, -100%) scale(1.4); filter: drop-shadow(0 0 12px rgba(232,84,122,0.8)); }
-                  60%  { transform: translate(-50%, -100%) scale(0.9); }
-                  100% { transform: translate(-50%, -100%) scale(1); }
-                }
-                @keyframes popIn {
-                  from { opacity: 0; transform: translate(-50%, -45%) scale(0.9); }
-                  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                }
-                .animate-heartbeat { animation: heartbeat 0.6s ease; }
-                .animate-popIn { animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-              `}</style>
-
-              {users.map((user) => {
-                const isDragging = dragState.id === user.id;
-                const isMatched = matchedPins.includes(user.id);
-                
-                return (
-                  <div
-                    key={user.id}
-                    onPointerDown={(e) => handlePointerDown(e, user)}
-                    className={`absolute flex flex-col items-center cursor-grab transform -translate-x-1/2 -translate-y-full transition-all duration-75 
-                      ${isDragging ? 'z-[999] drop-shadow-2xl cursor-grabbing scale-105' : 'z-50 hover:scale-105'}
-                      ${isMatched ? 'animate-heartbeat' : ''}
-                    `}
-                    style={{ left: `${user.x}%`, top: `${user.y}%` }}
-                  >
-                    <div 
-                      className="w-8 h-8 rounded-full border-2 border-white shadow-lg flex items-center justify-center font-bold text-white text-xs"
-                      style={{ backgroundColor: user.color }}
-                    >
-                      {getInitials(user.name)}
-                    </div>
-                    <div className="w-[3px] h-3 bg-white rounded-b-sm shadow-md"></div>
-                    <div className="bg-[#12121f]/85 text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full mt-1 backdrop-blur-sm whitespace-nowrap tracking-wide">
-                      {user.name.split(' ')[0]}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {activeUser && (
-                <div className="absolute top-1/2 left-1/2 bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] p-6 w-64 z-[300] animate-popIn border border-slate-100/50" style={{ transform: 'translate(-50%, -50%)' }}>
-                  <button 
-                    onClick={() => setActivePopupId(null)} 
-                    className="absolute top-3 right-3 text-slate-400 hover:text-slate-800 transition-colors w-6 h-6 flex items-center justify-center rounded-full hover:bg-slate-100"
-                  >
-                    ✕
-                  </button>
-                  <div 
-                    className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-3 shadow-md border-4 border-white" 
-                    style={{ background: activeUser.color }}
-                  >
-                    {getInitials(activeUser.name)}
-                  </div>
-                  <h3 className="text-center font-serif text-xl mb-0.5 text-slate-800" style={{ fontFamily: "'DM Serif Display', serif" }}>
-                    {activeUser.name}
-                  </h3>
-                  <p className="text-center text-slate-500 text-sm mb-4 font-medium">📍 {activeUser.college}</p>
-
-                  <div className="mb-4">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Personality</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeUser.myTraits.map(t => (
-                        <span key={t} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200/50">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Looking For</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeUser.idealTraits.map(t => (
-                        <span key={t} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-pink-50 text-pink-600 border border-pink-100">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div className={`absolute top-6 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-[0_8px_40px_rgba(232,84,122,0.25)] border-2 border-pink-100 p-4 text-center z-[500] min-w-[280px] transition-all duration-500 pointer-events-none
-                ${toast.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}
-              `}>
-                <div className="text-3xl mb-1">💘</div>
-                <div className="font-serif text-lg text-[#e8547a] mb-1" style={{ fontFamily: "'DM Serif Display', serif" }}>It's a BAGAY!</div>
-                <div className="text-sm text-slate-500 mb-1 font-medium">{toast.nameA} & {toast.nameB}</div>
-                <div className="text-xl font-bold text-slate-800">{toast.score}% compatible</div>
-              </div>
-
-              <div className={`absolute right-0 top-0 bottom-0 w-72 bg-[#12121f]/95 backdrop-blur-xl border-l border-white/10 p-5 overflow-y-auto z-[200] transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                <div className="flex items-center justify-between text-white mb-6">
-                  <h2 className="font-serif text-lg" style={{ fontFamily: "'DM Serif Display', serif" }}>💘 Matches</h2>
-                  <button onClick={() => setIsSidebarOpen(false)} className="text-white/40 hover:text-white transition-colors w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10">✕</button>
-                </div>
-                
-                {matches.length === 0 ? (
-                  <p className="text-white/40 text-sm text-center mt-10 font-medium">No matches yet.<br/>Drag pins together!</p>
-                ) : (
-                  matches.sort((a, b) => b.score - a.score).map((m, i) => {
-                    const a = users.find(u => u.id === m.a);
-                    const b = users.find(u => u.id === m.b);
-                    return (
-                      <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3.5 mb-3 hover:bg-white/10 transition-colors">
-                        <div className="text-white text-[13px] font-medium mb-1.5">{a.name.split(' ')[0]} & {b.name.split(' ')[0]}</div>
-                        <div className="text-[#e8547a] text-[11px] font-bold uppercase tracking-wider">{m.score}% compatible</div>
-                        <div className="h-1.5 w-full bg-white/10 rounded-full mt-2 overflow-hidden">
-                          <div className="h-full bg-[#e8547a] rounded-full transition-all duration-1000 ease-out" style={{ width: `${m.score}%` }}></div>
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-            </div>
-          );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('pins-overlay'));
-        root.render(<BagayMap />);
-    </script>
+</html>
