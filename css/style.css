@@ -10,7 +10,6 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid blue;
     height: 100%;
 }
 
@@ -21,8 +20,16 @@ img{
 }
 
 .first-person, .second-person{
-    border: 2px solid red;
     width: 100%;
     height: 800px;
     margin: 12px;
+}
+
+.collapsible{
+    margin: 12px;
+}
+
+.card{
+    margin: 12px;
+    padding: 12px;
 }
